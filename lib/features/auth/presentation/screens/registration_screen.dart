@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
 import 'package:shopapp/core/di/injection.dart';
 import 'package:shopapp/core/router/app_routes.dart';
+import 'package:shopapp/features/account/presentation/cubit/account_cubit.dart';
 import 'package:shopapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:shopapp/features/auth/presentation/widgets/auth_textfield.dart';
 import 'package:shopapp/features/auth/presentation/widgets/auth_footer_text.dart';
@@ -18,12 +19,14 @@ class RegistrationScreen extends StatefulWidget{
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController1 = TextEditingController();
   final TextEditingController passwordController2 = TextEditingController();
 
   @override
   void dispose() {
+    nameController.dispose();
     emailController.dispose();
     passwordController1.dispose();
     passwordController2.dispose();
@@ -32,146 +35,114 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => Injection.getAuthCubit(),
-      child: Builder(
-        builder: (context) => Scaffold(
-          backgroundColor: Colors.white,
-          body: SafeArea(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizes.p16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSizes.p16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
 
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
 
-                        const SizedBox(height: 150,),
+                      const SizedBox(height: AppSizes.p70,),
 
-                        const Text(
-                          "Registration",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: AppSizes.textTitleSize,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      const Text(
+                        "Registration",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: AppSizes.textTitleSize,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
 
-                        const SizedBox(height: AppSizes.p24,),
+                      const SizedBox(height: AppSizes.p24,),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Email",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: AppSizes.textDefaultSize,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                      AuthTextfield(
+                        textfieldName: "Name",
+                        prefixIcon: Icons.person,
+                        controller: nameController,
+                      ),
+
+                      const SizedBox(height: AppSizes.p16,),
+
+                      AuthTextfield(
+                        textfieldName: "Email",
+                        prefixIcon: Icons.email,
+                        controller: emailController,
+                      ),
+
+                      const SizedBox(height: AppSizes.p16,),
+
+                      AuthTextfield(
+                        textfieldName: "Password",
+                        prefixIcon: Icons.password,
+                        controller:  passwordController1,
+                      ),
+
+                      const SizedBox(height: AppSizes.p16,),
+
+                      AuthTextfield(
+                        textfieldName: "Confirm Password",
+                        prefixIcon: Icons.password,
+                        controller:  passwordController2,
+                      ),
+
+                      const SizedBox(height: AppSizes.p28,),
+
+                      AuthButton(
+                        text: "Sign Up",
+                        onPressed: () async{
+                          await context.read<AuthCubit>().signup(emailController.text, passwordController1.text, passwordController2.text);
+                          await context.read<AccountCubit>().addProfile(nameController.text);
+                          context.go(AppRoutes.homeScreen);
+                        },
+                      ),
+
+                      const SizedBox(height: AppSizes.p16,),
+
+                      const Text(
+                        "or",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: AppSizes.textDefaultSize,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
 
-                        AuthTextfield(
-                          prefixIcon: Icons.email,
-                          controller: emailController,
-                        ),
+                      const SizedBox(height: AppSizes.p16,),
 
-                        const SizedBox(height: AppSizes.p16,),
+                      AuthGoogleSignInButton(
+                        text: "Sign up with Google",
+                        onPressed: () {},
+                      ),
 
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Password",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: AppSizes.textDefaultSize,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                    ],
+                  ),
 
-                        AuthTextfield(
-                          prefixIcon: Icons.password,
-                          controller:  passwordController1,
-                        ),
+                  Column(
+                    children: [
 
-                        const SizedBox(height: AppSizes.p16,),
+                      const SizedBox(height: AppSizes.p28,),
 
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Confirm Password",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: AppSizes.textDefaultSize,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                      AuthFooterText(
+                        questionText: "Already have an account?",
+                        buttonText: "Log In",
+                        onPressed: () => context.pop(),
+                      ),
 
-                        AuthTextfield(
-                          prefixIcon: Icons.password,
-                          controller:  passwordController2,
-                        ),
+                      const SizedBox(height: AppSizes.p28,),
 
-                        const SizedBox(height: AppSizes.p28,),
+                    ],
+                  )
 
-                        AuthButton(
-                          text: "Sign Up",
-                          onPressed: () async{
-                            await context.read<AuthCubit>().signup(emailController.text, passwordController1.text, passwordController2.text);
-                            context.go(AppRoutes.homeScreen);
-                          },
-                        ),
-
-                        const SizedBox(height: AppSizes.p16,),
-
-                        const Text(
-                          "or",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: AppSizes.textDefaultSize,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
-                        const SizedBox(height: AppSizes.p16,),
-
-                        AuthGoogleSignInButton(
-                          text: "Sign up with Google",
-                          onPressed: () {},
-                        ),
-
-                      ],
-                    ),
-
-                    Column(
-                      children: [
-
-                        const SizedBox(height: AppSizes.p28,),
-
-                        AuthFooterText(
-                          questionText: "Already have an account?",
-                          buttonText: "Log In",
-                          onPressed: () => context.pop(),
-                        ),
-
-                        const SizedBox(height: AppSizes.p28,),
-
-                      ],
-                    )
-
-                  ],
-                ),
+                ],
               ),
             ),
           ),

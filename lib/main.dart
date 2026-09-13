@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:shopapp/core/router/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopapp/core/di/injection.dart';
 import 'package:shopapp/firebase_options.dart';
+import 'package:shopapp/my_app.dart';
 
 Future<void> main() async {
 
@@ -11,16 +13,20 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
-}
+  runApp(
+    MultiBlocProvider(
+      providers: [
 
-class MyApp extends StatelessWidget{
-  const MyApp({super.key});
+        BlocProvider(
+          create: (context) => Injection.getAuthCubit(),
+        ),
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: appRouter,
-    );
-  }
+        BlocProvider(
+          create: (context) => Injection.getAccountCubit(),
+        ),
+
+      ],
+      child: MyApp(),
+    ),
+  );
 }

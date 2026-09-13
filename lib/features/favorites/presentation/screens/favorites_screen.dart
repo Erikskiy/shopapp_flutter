@@ -4,7 +4,7 @@ import 'package:shopapp/core/constants/app_sizes.dart';
 import 'package:shopapp/core/router/app_routes.dart';
 import 'package:shopapp/features/favorites/presentation/widgets/favorites_count_icon.dart';
 import 'package:shopapp/features/favorites/presentation/widgets/favorite_product_card_container.dart';
-import 'package:shopapp/features/products/domain/product_entity.dart';
+import 'package:shopapp/features/products/domain/entities/product_entity.dart';
 
 class FavoritesScreen extends StatelessWidget{
   final ProductEntity product = ProductEntity(

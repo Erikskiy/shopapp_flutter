@@ -9,6 +9,7 @@ class AppSizes {
   static const double p28 = 28;
   static const double p32 = 32;
   static const double p36 = 36;
+  static const double p70 = 70;
   static const double paddingScreen = 16;
 
   // Radius

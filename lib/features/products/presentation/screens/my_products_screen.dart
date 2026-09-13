@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
 import 'package:shopapp/core/router/app_routes.dart';
-import 'package:shopapp/features/products/domain/product_entity.dart';
+import 'package:shopapp/features/products/domain/entities/product_entity.dart';
 import 'package:shopapp/features/products/presentation/widgets/products_textbutton.dart';
 import 'package:shopapp/features/products/presentation/widgets/my_products_card_container.dart';
 import 'package:shopapp/features/products/presentation/widgets/my_products_count_icon.dart';

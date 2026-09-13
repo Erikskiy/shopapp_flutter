@@ -5,7 +5,7 @@ import 'package:shopapp/core/router/app_routes.dart';
 import 'package:shopapp/features/cart/presentation/widgets/my_cart_buy_textbutton.dart';
 import 'package:shopapp/features/cart/presentation/widgets/my_cart_count_icon.dart';
 import 'package:shopapp/features/cart/presentation/widgets/my_cart_product_card_container.dart';
-import 'package:shopapp/features/products/domain/product_entity.dart';
+import 'package:shopapp/features/products/domain/entities/product_entity.dart';
 
 class MyCartScreen extends StatefulWidget{
   @override

@@ -1,8 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
-import 'package:shopapp/features/products/domain/product_entity.dart';
+import 'package:shopapp/features/products/domain/entities/product_entity.dart';
 
 class MyCartProductCardContainer extends StatelessWidget {
   final ProductEntity product;
