@@ -3,9 +3,11 @@ import 'package:shopapp/core/constants/app_sizes.dart';
 
 class MyProfileEditPhotoIconbutton extends StatelessWidget{
   final VoidCallback onIconTap;
+  final String avatarUrl;
 
   const MyProfileEditPhotoIconbutton({super.key,
     required this.onIconTap,
+    required this.avatarUrl,
   });
 
   @override
@@ -15,11 +17,14 @@ class MyProfileEditPhotoIconbutton extends StatelessWidget{
         child: Stack(
           children: [
 
-            SizedBox(
-              height: AppSizes.icon300,
-              width: AppSizes.icon300,
-              child: ColoredBox(
-                color: Colors.black12,
+            CircleAvatar(
+              radius: AppSizes.icon150,
+              backgroundColor: Colors.black12,
+              backgroundImage: avatarUrl.isNotEmpty ? NetworkImage(avatarUrl) : null,
+              child: avatarUrl.isNotEmpty ? null : Icon(
+                Icons.person_rounded,
+                size: AppSizes.icon80,
+                color: Colors.black,
               ),
             ),
 

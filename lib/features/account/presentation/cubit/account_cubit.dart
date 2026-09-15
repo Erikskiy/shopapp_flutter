@@ -1,19 +1,24 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/features/account/domain/entities/current_user_entity.dart';
 import 'package:shopapp/features/account/domain/usecases/add_profile_usecase.dart';
 import 'package:shopapp/features/account/domain/usecases/edit_profile_usecase.dart';
 import 'package:shopapp/features/account/domain/usecases/get_current_user_data_usecase.dart';
+import 'package:shopapp/features/account/domain/usecases/upload_avatar_usecase.dart';
 import 'package:shopapp/features/account/presentation/cubit/account_state.dart';
 
 class AccountCubit extends Cubit<AccountState>{
   final AddProfileUsecase addProfileUsecase;
   final EditProfileUsecase editProfileUsecase;
   final GetCurrentUserDataUsecase getCurrentUserDataUsecase;
+  final UploadAvatarUsecase uploadAvatarUsecase;
 
   AccountCubit({
     required this.addProfileUsecase,
     required this.editProfileUsecase,
     required this.getCurrentUserDataUsecase,
+    required this.uploadAvatarUsecase,
   }):super(AccountInitial());
 
 
@@ -51,5 +56,9 @@ class AccountCubit extends Cubit<AccountState>{
     } catch(e){
       emit(AccountError(error: e.toString()));
     }
+  }
+
+  Future<String> uploadAvatar(File image) async{
+    return await uploadAvatarUsecase.call(image);
   }
 }

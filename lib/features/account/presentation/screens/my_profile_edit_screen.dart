@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
 import 'package:shopapp/features/account/presentation/cubit/account_cubit.dart';
 import 'package:shopapp/features/account/presentation/cubit/account_state.dart';
@@ -20,6 +22,19 @@ class _MyProfileEditScreenState extends State<MyProfileEditScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   String avatarUrl = "";
+
+  final ImagePicker imagePicker = ImagePicker();
+  File? selectedImage;
+
+  Future<void> pickImage() async{
+    final XFile? image = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (image == null) return;
+    setState(() {
+      selectedImage = File(image.path);
+    });
+  }
 
   @override
   void dispose() {
@@ -55,7 +70,10 @@ class _MyProfileEditScreenState extends State<MyProfileEditScreen> {
                 children: [
 
                   MyProfileEditPhotoIconbutton(
-                    onIconTap: (){},
+                    avatarUrl: avatarUrl,
+                    onIconTap: (){
+                      pickImage();
+                    },
                   ),
 
                   SizedBox(height: AppSizes.p16,),
@@ -82,7 +100,15 @@ class _MyProfileEditScreenState extends State<MyProfileEditScreen> {
               MyProfileEditTextbutton(
                 text: "Save",
                 onPressed: () async{
-                  await context.read<AccountCubit>().editProfile(nameController.text, avatarUrl);
+                  final accountCubit = context.read<AccountCubit>();
+
+                  if (selectedImage != null) {
+                    final uploadedUrl = await accountCubit.uploadAvatar(selectedImage!);
+                    avatarUrl = uploadedUrl;
+                  }
+
+                  await accountCubit.editProfile(nameController.text, avatarUrl);
+
                   context.pop();
                 },
               ),

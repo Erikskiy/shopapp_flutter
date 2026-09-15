@@ -16,8 +16,10 @@ class MyAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<AccountCubit>().state;
     String name = "User";
-    if (state is AccountLoaded) {
+    String avatarUrl = "";
+    if(state is AccountLoaded){
       name = state.currentUserEntity.name;
+      avatarUrl = state.currentUserEntity.avatarUrl;
     }
 
     return Scaffold(
@@ -36,7 +38,8 @@ class MyAccountScreen extends StatelessWidget {
                 child: CircleAvatar(
                   radius: AppSizes.icon80,
                   backgroundColor: Colors.black12,
-                  child: Icon(
+                  backgroundImage: avatarUrl.isNotEmpty ? NetworkImage(avatarUrl) : null,
+                  child: avatarUrl.isNotEmpty ? null : Icon(
                     Icons.person_rounded,
                     size: AppSizes.icon80,
                     color: Colors.black,
