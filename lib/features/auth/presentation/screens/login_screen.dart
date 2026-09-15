@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
 import 'package:shopapp/core/router/app_routes.dart';
+import 'package:shopapp/features/account/presentation/cubit/account_cubit.dart';
 import 'package:shopapp/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:shopapp/features/auth/presentation/widgets/auth_textfield.dart';
 import 'package:shopapp/features/auth/presentation/widgets/auth_footer_text.dart';
@@ -76,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: "Log In",
                       onPressed: () async{
                         await context.read<AuthCubit>().login(emailController.text, passwordController.text);
+                        await context.read<AccountCubit>().getCurrentUserData();
                         context.go(AppRoutes.homeScreen);
                       },
                     ),

@@ -1,4 +1,5 @@
 import 'package:shopapp/features/account/data/datasources/remote/account_firebase_datasource.dart';
+import 'package:shopapp/features/account/domain/entities/current_user_entity.dart';
 import 'package:shopapp/features/account/domain/repositories/account_repository.dart';
 
 class AccountRepositoryImpl extends AccountRepository{
@@ -9,8 +10,8 @@ class AccountRepositoryImpl extends AccountRepository{
   });
 
   @override
-  Future<void> addProfile(String name) async{
-    await accountFirebaseDatasource.addProfile(name);
+  Future<void> addProfile(String name, String email) async{
+    await accountFirebaseDatasource.addProfile(name, email);
   }
 
   @override
@@ -18,8 +19,8 @@ class AccountRepositoryImpl extends AccountRepository{
     await accountFirebaseDatasource.editProfile(name, avatarUrl);
   }
 
-  // @override
-  // Future<String> getCurrentUserName() async{
-  //
-  // }
+  @override
+  Future<CurrentUserEntity> getCurrentUserData() async {
+    return await accountFirebaseDatasource.getCurrentUserData();
+  }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
-import 'package:shopapp/core/di/injection.dart';
 import 'package:shopapp/core/router/app_routes.dart';
 import 'package:shopapp/features/account/presentation/cubit/account_cubit.dart';
 import 'package:shopapp/features/auth/presentation/cubit/auth_cubit.dart';
@@ -100,7 +99,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         text: "Sign Up",
                         onPressed: () async{
                           await context.read<AuthCubit>().signup(emailController.text, passwordController1.text, passwordController2.text);
-                          await context.read<AccountCubit>().addProfile(nameController.text);
+                          await context.read<AccountCubit>().addProfile(nameController.text, emailController.text);
+                          await context.read<AccountCubit>().getCurrentUserData();
                           context.go(AppRoutes.homeScreen);
                         },
                       ),

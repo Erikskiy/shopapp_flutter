@@ -3,23 +3,35 @@ import 'package:shopapp/core/constants/app_sizes.dart';
 
 class MyProfileEditTextfield extends StatelessWidget{
   final TextEditingController controller;
-  final IconData icon;
+  final IconData prefixIcon;
+  final IconData? suffixIcon;
+  final bool readOnly;
 
   const MyProfileEditTextfield({
     super.key,
     required this.controller,
-    required this.icon,
+    required this.prefixIcon,
+    required this.suffixIcon,
+    required this.readOnly,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: TextStyle(
+        fontSize: AppSizes.textDefaultSize,
+      ),
       controller: controller,
+      readOnly: readOnly,
       decoration: InputDecoration(
         prefixIcon: Icon(
-          icon,
+          prefixIcon,
           size: AppSizes.icon28,
         ),
+        suffixIcon: suffixIcon != null ? Icon(
+          suffixIcon,
+          size: AppSizes.icon28,
+        ): null,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
           borderSide: const BorderSide(

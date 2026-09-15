@@ -34,6 +34,9 @@ class AuthTextfield extends StatelessWidget{
 
         TextField(
           controller: controller,
+          style: TextStyle(
+            fontSize: AppSizes.textDefaultSize,
+          ),
           decoration: InputDecoration(
             prefixIcon: Icon(
               prefixIcon,

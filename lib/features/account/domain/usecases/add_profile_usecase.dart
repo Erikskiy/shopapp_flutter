@@ -7,7 +7,7 @@ class AddProfileUsecase{
     required this.accountRepository,
   });
 
-  Future<void> call(String name) async{
-    await accountRepository.addProfile(name);
+  Future<void> call(String name, String email) async{
+    await accountRepository.addProfile(name, email);
   }
 }
