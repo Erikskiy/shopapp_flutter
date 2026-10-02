@@ -6,6 +6,7 @@ import 'package:shopapp/features/auth/presentation/screens/login_screen.dart';
 import 'package:shopapp/features/auth/presentation/screens/registration_screen.dart';
 import 'package:shopapp/features/cart/presentation/screens/my_cart_screen.dart';
 import 'package:shopapp/features/checkout/presentation/screens/checkout_screen.dart';
+import 'package:shopapp/features/checkout/presentation/screens/order_success_screen.dart';
 import 'package:shopapp/features/checkout/presentation/screens/payment_settings_screen.dart';
 import 'package:shopapp/features/checkout/presentation/screens/shipping_address_screen.dart';
 import 'package:shopapp/features/favorites/presentation/screens/favorites_screen.dart';
@@ -51,7 +52,7 @@ final GoRouter appRouter = GoRouter(
     ),
 
     GoRoute(
-      path: AppRoutes.paymentSettings,
+      path: AppRoutes.paymentSettingsScreen,
       builder: (context, state) => PaymentSettingsScreen(),
     ),
 
@@ -63,6 +64,11 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.myProfileEditScreen,
       builder: (context, state) => MyProfileEditScreen(),
+    ),
+
+    GoRoute(
+      path: AppRoutes.orderSuccessScreen,
+      builder: (context, state) => OrderSuccessScreen(),
     ),
 
 

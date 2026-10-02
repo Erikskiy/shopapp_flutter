@@ -4,11 +4,15 @@ import 'package:shopapp/core/constants/app_sizes.dart';
 class CheckoutPaymentmethodIconbuttons extends StatelessWidget{
   final VoidCallback onCardTap;
   final VoidCallback onWalletTap;
+  final Color cardColor;
+  final Color walletColor;
 
   const CheckoutPaymentmethodIconbuttons({
     super.key,
     required this.onCardTap,
     required this.onWalletTap,
+    required this.cardColor,
+    required this.walletColor,
 });
 
   @override
@@ -23,6 +27,7 @@ class CheckoutPaymentmethodIconbuttons extends StatelessWidget{
             height: AppSizes.icon80,
             width: AppSizes.icon80,
             decoration: BoxDecoration(
+              color: cardColor,
               border: BoxBorder.all(
                 color: Colors.black,
                 width: 1,
@@ -62,6 +67,7 @@ class CheckoutPaymentmethodIconbuttons extends StatelessWidget{
             height: AppSizes.icon80,
             width: AppSizes.icon80,
             decoration: BoxDecoration(
+              color: walletColor,
               border: BoxBorder.all(
                 color: Colors.black,
                 width: 1,

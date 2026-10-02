@@ -15,7 +15,11 @@ class AuthFirebaseDatasource {
     await firebaseAuth.signOut();
   }
 
-  Future<void> getCurrentUser() async{
-
+  String getCurrentUser(){
+    try{
+      return firebaseAuth.currentUser!.uid;
+    }catch(e){
+      return "";
+    }
   }
 }

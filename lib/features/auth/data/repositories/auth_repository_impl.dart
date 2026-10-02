@@ -19,8 +19,8 @@ class AuthRepositoryImpl extends AuthRepository{
   }
 
   @override
-  Future<void> getCurrentUser() async{
-    await authFirebaseDatasource.getCurrentUser();
+  String getCurrentUser() {
+    return authFirebaseDatasource.getCurrentUser();
   }
 
   @override

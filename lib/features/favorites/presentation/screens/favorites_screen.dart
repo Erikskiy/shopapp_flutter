@@ -8,7 +8,7 @@ import 'package:shopapp/features/products/domain/entities/product_entity.dart';
 
 class FavoritesScreen extends StatelessWidget{
   final ProductEntity product = ProductEntity(
-    id: "11111",
+    ownerId: "1111",
     name: "Nike Hoodie",
     description: "",
     price: 500,

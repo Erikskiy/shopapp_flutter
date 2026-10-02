@@ -4,10 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/core/di/injection.dart';
 import 'package:shopapp/firebase_options.dart';
 import 'package:shopapp/my_app.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -24,6 +27,14 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => Injection.getAccountCubit(),
         ),
+
+        BlocProvider(
+          create: (context) => Injection.getCheckoutCubit(),
+        ),
+
+        BlocProvider(
+          create: (context) => Injection.getProductCubit()..getMyProducts(),
+        )
 
       ],
       child: MyApp(),

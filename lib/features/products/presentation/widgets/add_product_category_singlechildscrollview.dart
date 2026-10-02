@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
 
-class AddProductCategorySinglechildscrollview extends StatelessWidget{
+class AddProductCategorySinglechildscrollview extends StatelessWidget {
+  TextEditingController productCategoryController;
+
+  AddProductCategorySinglechildscrollview({
+    super.key,
+    required this.productCategoryController,
+  });
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -10,105 +17,68 @@ class AddProductCategorySinglechildscrollview extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
 
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "Dresses",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          _categoryButton("Dresses", () {
+            productCategoryController.text = "Dresses";
+          },),
+          SizedBox(width: AppSizes.p12),
 
-          SizedBox(width: AppSizes.p12,),
+          _categoryButton("Jackets", () {
+            productCategoryController.text = "Jackets";
+          },),
+          SizedBox(width: AppSizes.p12),
 
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "Jackets",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          _categoryButton("Jeans", () {
+            productCategoryController.text = "Jeans";
+          },),
+          SizedBox(width: AppSizes.p12),
 
-          SizedBox(width: AppSizes.p12,),
+          _categoryButton("T-Shirts", () {
+            productCategoryController.text = "T-Shirts";
+          },),
+          SizedBox(width: AppSizes.p12),
 
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "Jeans",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          _categoryButton("Hoodies", () {
+            productCategoryController.text = "Hoodies";
+          },),
+          SizedBox(width: AppSizes.p12),
 
-          SizedBox(width: AppSizes.p12,),
+          _categoryButton("Pants", () {
+            productCategoryController.text = "Pants";
+          },),
+          SizedBox(width: AppSizes.p12),
 
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "AAAA",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          _categoryButton("Shoes", () {
+            productCategoryController.text = "Shoes";
+          },),
+          SizedBox(width: AppSizes.p12),
 
-          SizedBox(width: AppSizes.p12,),
-
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "AAAA",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          _categoryButton("Accessories", () {
+            productCategoryController.text = "Accessories";
+          },),
 
         ],
+      ),
+    );
+  }
+
+  Widget _categoryButton(String category, VoidCallback onPressed) {
+    return Container(
+      height: 45,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(AppSizes.textfieldRadius_24),
+        ),
+        color: Colors.black12,
+      ),
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          category,
+          style: TextStyle(
+            fontSize: AppSizes.textSmallSize,
+            color: Colors.black,
+          ),
+        ),
       ),
     );
   }

@@ -27,5 +27,6 @@ class AppRoutes {
   //checkout
   static const String checkoutScreen = "/checkoutScreen";
   static const String shippingAddressScreen = "/shippingAddressScreen";
-  static const String paymentSettings = "/paymentSettings";
+  static const String paymentSettingsScreen = "/paymentSettingsScreen";
+  static const String orderSuccessScreen = "/orderSuccessScreen";
 }

@@ -2,6 +2,7 @@ import 'package:shopapp/features/checkout/domain/entities/payment_card_details_e
 
 class PaymentCardDetailsModel extends PaymentCardDetailsEntity{
   PaymentCardDetailsModel({
+    required super.paymentMethod,
     required super.nameOnCard,
     required super.cardNumber,
     required super.cvv,
@@ -11,16 +12,18 @@ class PaymentCardDetailsModel extends PaymentCardDetailsEntity{
 
   factory PaymentCardDetailsModel.fromJson(Map<String, dynamic> json){
     return PaymentCardDetailsModel(
-        nameOnCard: json["nameOnCard"] ?? "",
-        cardNumber: json["cardNumber"] ?? "",
-        cvv: json["cvv"] ?? "",
-        expiryDate: json["expiryDate"]?? "",
-        shippingAddress: json["shippingAddress"] ?? "",
+      paymentMethod: json["paymentMethod"] ?? "",
+      nameOnCard: json["nameOnCard"] ?? "",
+      cardNumber: json["cardNumber"] ?? "",
+      cvv: json["cvv"] ?? "",
+      expiryDate: json["expiryDate"]?? "",
+      shippingAddress: json["shippingAddress"] ?? "",
     );
   }
 
   Map<String, dynamic> toJson(){
     return {
+      "paymentMethod": paymentMethod,
       "nameOnCard": nameOnCard,
       "cardNumber": cardNumber,
       "cvv": cvv,

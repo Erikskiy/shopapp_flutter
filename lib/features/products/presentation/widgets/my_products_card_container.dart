@@ -35,14 +35,26 @@ class MyProductsCardContainer extends StatelessWidget{
         children: [
 
           Expanded(
-              flex: 2,
-              child: GestureDetector(
-                onTap: onImageTap,
-                child: ColoredBox(
-                  color: Colors.black12,
-                  child: SizedBox.expand(),
-                ),
-              )
+            flex: 2,
+            child: GestureDetector(
+              onTap: onImageTap,
+              child: Image.network(
+                product.imageUrl,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const ColoredBox(
+                    color: Colors.black12,
+                    child: Center(
+                      child: Icon(
+                        Icons.broken_image_outlined,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
 
           Expanded(

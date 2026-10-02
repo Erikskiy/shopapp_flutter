@@ -14,7 +14,7 @@ class MyCartScreen extends StatefulWidget{
 
 class _MyCartScreenState extends State<MyCartScreen> {
   final ProductEntity product = ProductEntity(
-    id: "11111",
+    ownerId: "1111",
     name: "Nike Hoodie",
     description: "",
     price: 500,

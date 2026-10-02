@@ -2,15 +2,15 @@ import 'dart:io';
 import 'package:cloudinary/cloudinary.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class AccountCloudinaryDatasource {
+class ProductCloudinaryDatasource {
   final Cloudinary cloudinary = Cloudinary.unsignedConfig(
     cloudName: dotenv.env["CLOUDINARY_CLOUD_NAME"]!,
   );
 
-  Future<String> uploadAvatar(File image) async {
+  Future<String> uploadProductImage(File image) async {
     final response = await cloudinary.unsignedUpload(
       file: image.path,
-      uploadPreset: dotenv.env["CLOUDINARY_AVATAR_PRESET"]!,
+      uploadPreset: dotenv.env["CLOUDINARY_PRODUCT_PRESET"]!,
       resourceType: CloudinaryResourceType.image,
     );
 

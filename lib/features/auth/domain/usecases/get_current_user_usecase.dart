@@ -7,7 +7,7 @@ class GetCurrentUserUsecase {
     required this.authRepository,
   });
 
-  Future<void> call(String email, String password) async{
-    await authRepository.getCurrentUser();
+  String call(){
+    return authRepository.getCurrentUser();
   }
 }

@@ -9,6 +9,7 @@ import 'package:shopapp/features/auth/presentation/widgets/auth_textfield.dart';
 import 'package:shopapp/features/auth/presentation/widgets/auth_footer_text.dart';
 import 'package:shopapp/features/auth/presentation/widgets/auth_button.dart';
 import 'package:shopapp/features/auth/presentation/widgets/auth_google_sign_in_button.dart';
+import 'package:shopapp/features/checkout/presentation/cubit/checkout_cubit.dart';
 
 class RegistrationScreen extends StatefulWidget{
   const RegistrationScreen({super.key});

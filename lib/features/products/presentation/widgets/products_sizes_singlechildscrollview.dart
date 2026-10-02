@@ -1,154 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:shopapp/core/constants/app_sizes.dart';
 
-class ProductsSizesSinglechildscrollview extends StatelessWidget{
+class ProductsSizesSinglechildscrollview extends StatelessWidget {
+  final List<String> selectedSizes;
+  final Function(String) onSizeTap;
+
+  const ProductsSizesSinglechildscrollview({
+    super.key,
+    required this.selectedSizes,
+    required this.onSizeTap,
+  });
+
   @override
   Widget build(BuildContext context) {
+
+    final List<String> sizes = [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL",
+      "XXXL",
+    ];
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
+        children: sizes.map((size) {
 
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
+          final bool isSelected = selectedSizes.contains(size);
+
+          return Padding(
+            padding: EdgeInsets.only(
+              right: AppSizes.p12,
             ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "XS",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
+            child: Container(
+              height: 45,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    AppSizes.textfieldRadius_24,
+                  ),
+                ),
+                color: isSelected
+                    ? Colors.black
+                    : Colors.black12,
+              ),
+              child: TextButton(
+                onPressed: () {
+                  onSizeTap(size);
+                },
+                child: Text(
+                  size,
+                  style: TextStyle(
+                    fontSize: AppSizes.textSmallSize,
+                    color: isSelected
+                        ? Colors.white
+                        : Colors.black,
+                  ),
                 ),
               ),
             ),
-          ),
-
-          SizedBox(width: AppSizes.p12,),
-
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "S",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-
-          SizedBox(width: AppSizes.p12,),
-
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "M",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-
-          SizedBox(width: AppSizes.p12,),
-
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "L",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-
-          SizedBox(width: AppSizes.p12,),
-
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "XL",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-
-          SizedBox(width: AppSizes.p12,),
-
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "XXL",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-
-          SizedBox(width: AppSizes.p12,),
-
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.textfieldRadius_24)),
-              color: Colors.black12,
-            ),
-            child: TextButton(
-              onPressed: (){},
-              child: Text(
-                "XXXL",
-                style: TextStyle(
-                  fontSize: AppSizes.textSmallSize,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-
-        ],
+          );
+        }).toList(),
       ),
     );
   }

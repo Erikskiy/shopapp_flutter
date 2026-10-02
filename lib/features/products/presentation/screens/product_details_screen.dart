@@ -97,7 +97,7 @@ class ProductDetailsScreen extends StatelessWidget{
 
                           SizedBox(height: AppSizes.p4,),
 
-                          ProductsSizesSinglechildscrollview(),
+                          //ProductsSizesSinglechildscrollview(),
 
                           SizedBox(height: AppSizes.p16,),
 

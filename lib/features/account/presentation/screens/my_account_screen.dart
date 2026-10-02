@@ -97,7 +97,7 @@ class MyAccountScreen extends StatelessWidget {
                 buttonIcon: Icons.payment,
                 buttonName: "Payment Settings",
                 onTap: () {
-                  context.push(AppRoutes.paymentSettings);
+                  context.push(AppRoutes.paymentSettingsScreen);
                 },
               ),
 
